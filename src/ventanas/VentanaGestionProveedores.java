@@ -35,6 +35,7 @@ public class VentanaGestionProveedores extends JPanel {
 	public JButton btnBuscarProveedores;
 	public JButton btnSeleccionar;
 	public JButton btnLimpiar;
+	public JButton btnListaDeProveedores;
 
 	/**
 	 * Create the panel.
@@ -120,11 +121,11 @@ public class VentanaGestionProveedores extends JPanel {
 				}
 				
 				
-				if(textFieldNombreProveedores.getText().length()>= 25) {
+				if(textFieldNombreProveedores.getText().length()> 40) {
 					getToolkit().beep();
 					e.consume();
 					
-					JOptionPane.showMessageDialog(null, "Ingresar 15 letras o menos");
+					JOptionPane.showMessageDialog(null, "Ingresar 40 letras o menos");
 				}
 				
 			}
@@ -333,6 +334,14 @@ public class VentanaGestionProveedores extends JPanel {
 		btnLimpiar.setBackground(new Color(0, 51, 153));
 		btnLimpiar.setBounds(399, 209, 113, 25);
 		add(btnLimpiar);
+		
+		btnListaDeProveedores = new JButton("LISTA DE PROVEEDORES");
+		btnListaDeProveedores.setForeground(Color.WHITE);
+		btnListaDeProveedores.setFont(new Font("Roboto", Font.BOLD, 12));
+		btnListaDeProveedores.setBorder(null);
+		btnListaDeProveedores.setBackground(new Color(0, 51, 153));
+		btnListaDeProveedores.setBounds(153, 442, 163, 25);
+		add(btnListaDeProveedores);
 
 	}
 	
@@ -373,5 +382,12 @@ public class VentanaGestionProveedores extends JPanel {
 		return camposLlenos;
 	}
 	
-	
+	public void borrarElementosTabla() {
+		 
+        int numeroFilasBorrar = model.getRowCount();
+        //remove rows from the bottom one by one
+        for (int i = numeroFilasBorrar - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+	}
 }

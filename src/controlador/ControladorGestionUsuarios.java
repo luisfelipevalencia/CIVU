@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,8 @@ public class ControladorGestionUsuarios implements ActionListener{
 		this.ventanaGestionUsuarios.btnRegistrar.addActionListener(this);
 		this.ventanaGestionUsuarios.btnLimpiar.addActionListener(this);
 		this.ventanaGestionUsuarios.btnSeleccionar.addActionListener(this);
+		this.ventanaGestionUsuarios.btnTraerInfoDB.addActionListener(this);
+		consultaUsuario.poblarTabla(ventanaGestionUsuarios.table);
 	}
 
 	@Override
@@ -40,6 +43,9 @@ public class ControladorGestionUsuarios implements ActionListener{
 				int id = Integer.valueOf(ventanaGestionUsuarios.textFieldBuscarUsuarioPorId.getText());
 				
 				if(consultaUsuario.buscar(empleado, id)) {
+					
+					ventanaGestionUsuarios.borrarElementosTabla();
+					
 					//agregar valores a la tabla
 					ponerValoresUsuarioEnTabla();
 					ventanaGestionUsuarios.textFieldBuscarUsuarioPorId.setText(null);
@@ -68,7 +74,7 @@ public class ControladorGestionUsuarios implements ActionListener{
 		//metodo que modifica informacion de un empleado
 		if(e.getSource() == ventanaGestionUsuarios.btnModificarUsuario) {
 			
-			if(ventanaGestionUsuarios.validarCamposLlenos() && ventanaGestionUsuarios.validarFormatoFecha()) {
+			if(ventanaGestionUsuarios.validarCamposLlenos()) {
 				ponerValoresEnModeloUsuario();
 				consultaUsuario.modificar(empleado);
 				ventanaGestionUsuarios.limpiarCasillas();
@@ -81,10 +87,14 @@ public class ControladorGestionUsuarios implements ActionListener{
 		//metodo para registrar un empleado en la base de datos
 		if(e.getSource() == ventanaGestionUsuarios.btnRegistrar) {
 			
-			if(ventanaGestionUsuarios.validarCamposLlenos() && ventanaGestionUsuarios.validarFormatoFecha()) {
+			if(ventanaGestionUsuarios.validarCamposLlenos()) {
 				ponerValoresEnModeloUsuario();
 				consultaUsuario.registrar(empleado);
 				ventanaGestionUsuarios.limpiarCasillas();
+				
+				ventanaGestionUsuarios.borrarElementosTabla();
+				consultaUsuario.poblarTabla(ventanaGestionUsuarios.table);
+				
 			}else {
 			
 			JOptionPane.showMessageDialog(null, "Complete todos los campos con el formato correcto");
@@ -100,7 +110,15 @@ public class ControladorGestionUsuarios implements ActionListener{
 		if(e.getSource() == ventanaGestionUsuarios.btnSeleccionar) {
 
 			int fila = ventanaGestionUsuarios.table.getSelectedRow();
+			
 			ponerValoresTablaEnCasillas(fila);
+			ventanaGestionUsuarios.borrarElementosTabla();
+			
+		}
+		
+		if(e.getSource() == ventanaGestionUsuarios.btnTraerInfoDB) {
+			ventanaGestionUsuarios.borrarElementosTabla();
+			consultaUsuario.poblarTabla(ventanaGestionUsuarios.table);
 		}
 	
 		
@@ -111,9 +129,11 @@ public class ControladorGestionUsuarios implements ActionListener{
 		empleado.setId(Integer.valueOf(ventanaGestionUsuarios.textFieldIdUsuario.getText()));
 		empleado.setNombre(ventanaGestionUsuarios.textFieldNombreUsuario.getText());
 		empleado.setTelefono(ventanaGestionUsuarios.textFieldTelefonoUsuario.getText());
-		empleado.setCargo(ventanaGestionUsuarios.textFieldCargoUsuario.getText());
+		empleado.setCargo(ventanaGestionUsuarios.comboBoxCargo.getSelectedItem().toString());
 		empleado.setPassword(ventanaGestionUsuarios.textFieldPasswordUsuario.getText());
-		empleado.setFechaNacimiento(Date.valueOf(ventanaGestionUsuarios.textFieldFechaNacimientoUsuario.getText()));
+		empleado.setFechaNacimiento(Date.valueOf(fechaNacimiento()));
+		
+		
 	}
 	
 	public void ponerValoresEnArreglo(Object[] arreglo) {
@@ -146,20 +166,64 @@ public class ControladorGestionUsuarios implements ActionListener{
 	
 	public void ponerValoresTablaEnCasillas(int fila) {
 		
+		
 		ventanaGestionUsuarios.textFieldIdUsuario.setText((ventanaGestionUsuarios.table.getValueAt(fila, 0).toString()));
 		ventanaGestionUsuarios.textFieldNombreUsuario.setText((String) ventanaGestionUsuarios.table.getValueAt(fila, 1));
 		ventanaGestionUsuarios.textFieldTelefonoUsuario.setText((String) ventanaGestionUsuarios.table.getValueAt(fila, 2));
-		ventanaGestionUsuarios.textFieldCargoUsuario.setText((String) ventanaGestionUsuarios.table.getValueAt(fila, 3));
+		ventanaGestionUsuarios.comboBoxCargo.setSelectedIndex(cargoIndexNumber((String) ventanaGestionUsuarios.table.getValueAt(fila, 3)));
 		ventanaGestionUsuarios.textFieldPasswordUsuario.setText((String) ventanaGestionUsuarios.table.getValueAt(fila, 4));
-		
-		Date dateObj = (Date) ventanaGestionUsuarios.table.getValueAt(fila, 5);
-		String fecha = dateObj.toString();
-		ventanaGestionUsuarios.textFieldFechaNacimientoUsuario.setText(fecha);
+		ponerFechaTablaEnCasillas(fila);
 		
 	}
 	
 	
+	public void ponerFechaTablaEnCasillas(int fila) {
+		
+		Date date =  (Date) ventanaGestionUsuarios.table.getValueAt(fila, 5);
+		
+		LocalDate  localDate = date.toLocalDate();
+		
+		int day = localDate.getDayOfMonth();
+		int month = localDate.getMonthValue();
+		int year = localDate.getYear();
+		
+		System.out.println(year);
+		System.out.println(month);
+		System.out.println(day);
+		
+		ventanaGestionUsuarios.comboBoxYear.setSelectedIndex(year-1920);
+		ventanaGestionUsuarios.comboBoxMonth.setSelectedIndex(month);
+		ventanaGestionUsuarios.comboBoxDay.setSelectedIndex(day);
+		
+	}
 	
+	public int cargoIndexNumber(String cargo) {
+		
+		int index = 0;
+		
+		if(cargo.equals("")) {
+			index=0;
+		}else {
+			if(cargo.equals("administrador") || cargo.equals("Administrador") ) {
+				index=1;
+			}else {
+				if(cargo.equals("vendedor") || cargo.equals("Vendedor")) {
+					index=2;
+				}
+			}
+		}
+			
+		return index;
+	}
 	
-
+	public String fechaNacimiento() {
+		
+		String fecha ="";
+		
+		fecha = ventanaGestionUsuarios.comboBoxYear.getSelectedItem().toString() + "-" + ventanaGestionUsuarios.comboBoxMonth.getSelectedItem().toString() + "-" + ventanaGestionUsuarios.comboBoxDay.getSelectedItem().toString();
+		
+		
+		return fecha;
+		
+	}
 }

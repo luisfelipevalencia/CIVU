@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,8 @@ public class ControladorGestionClientes implements ActionListener {
 		this.ventanaGestionClientes.btnRegistrarCliente.addActionListener(this);
 		this.ventanaGestionClientes.btnSeleccionar.addActionListener(this);
 		this.ventanaGestionClientes.btnLimpiar.addActionListener(this);
+		this.ventanaGestionClientes.btnListaDeClientes.addActionListener(this);
+		consultaCliente.poblarTabla(ventanaGestionClientes.table);
 		
 	}
 
@@ -39,6 +42,9 @@ public class ControladorGestionClientes implements ActionListener {
 				int id = Integer.valueOf(ventanaGestionClientes.textFieldBuscarClientePorId.getText());
 				
 				if(consultaCliente.buscar(cliente, id)) {
+					
+					ventanaGestionClientes.borrarElementosTabla();
+					
 					//agregar valores a la tabla
 					ponerValoresUsuarioEnTabla();
 					ventanaGestionClientes.textFieldBuscarClientePorId.setText(null);
@@ -59,13 +65,13 @@ public class ControladorGestionClientes implements ActionListener {
 				consultaCliente.eliminar(id);
 				ventanaGestionClientes.limpiarCasillas();
 			}else {
-				JOptionPane.showMessageDialog(null, "Ingrese el ID del empleado que desea eliminar");
+				JOptionPane.showMessageDialog(null, "Ingrese el ID del cliente que desea eliminar");
 			}
 		}
 			
 		
 		if(e.getSource() == ventanaGestionClientes.btnModificarCliente) {
-			if(ventanaGestionClientes.validarCamposLlenos() && ventanaGestionClientes.validarFormatoFecha()) {
+			if(ventanaGestionClientes.validarCamposLlenos()) {
 				ponerValoresEnModeloUsuario();
 				consultaCliente.modificar(cliente);
 				ventanaGestionClientes.limpiarCasillas();
@@ -76,10 +82,14 @@ public class ControladorGestionClientes implements ActionListener {
 		
 		
 		if(e.getSource() == ventanaGestionClientes.btnRegistrarCliente) {
-			if(ventanaGestionClientes.validarCamposLlenos() && ventanaGestionClientes.validarFormatoFecha()) {
+			if(ventanaGestionClientes.validarCamposLlenos()) {
 				ponerValoresEnModeloUsuario();
 				consultaCliente.registrar(cliente);
 				ventanaGestionClientes.limpiarCasillas();
+				
+				ventanaGestionClientes.borrarElementosTabla();
+				consultaCliente.poblarTabla(ventanaGestionClientes.table);
+				
 			}else {
 			
 			JOptionPane.showMessageDialog(null, "Complete todos los campos con el formato correcto");
@@ -97,6 +107,15 @@ public class ControladorGestionClientes implements ActionListener {
 			int fila = ventanaGestionClientes.table.getSelectedRow();
 			ponerValoresTablaEnCasillas(fila);
 			
+			ventanaGestionClientes.borrarElementosTabla();
+			
+		}
+		
+		
+		if(e.getSource() == ventanaGestionClientes.btnListaDeClientes) {
+			ventanaGestionClientes.borrarElementosTabla();
+			consultaCliente.poblarTabla(ventanaGestionClientes.table);
+			
 		}
 		
 	}
@@ -106,7 +125,7 @@ public class ControladorGestionClientes implements ActionListener {
 		cliente.setId(Integer.valueOf(ventanaGestionClientes.textFieldIdCliente.getText()));
 		cliente.setNombre(ventanaGestionClientes.textFieldNombreCliente.getText());
 		cliente.setTelefono(ventanaGestionClientes.textFieldTelefonoCliente.getText());
-		cliente.setFechaNacimiento(Date.valueOf(ventanaGestionClientes.textFieldFechaNacimientoCliente.getText()));
+		cliente.setFechaNacimiento(Date.valueOf(fechaNacimiento()));
 	}
 	
 	public void ponerValoresEnArreglo(Object[] arreglo) {
@@ -140,10 +159,39 @@ public class ControladorGestionClientes implements ActionListener {
 		ventanaGestionClientes.textFieldIdCliente.setText((ventanaGestionClientes.table.getValueAt(fila, 0).toString()));
 		ventanaGestionClientes.textFieldNombreCliente.setText((String) ventanaGestionClientes.table.getValueAt(fila, 1));
 		ventanaGestionClientes.textFieldTelefonoCliente.setText((String) ventanaGestionClientes.table.getValueAt(fila, 2));
+		ponerFechaTablaEnCasillas(fila);
+
 		
-		Date dateObj = (Date) ventanaGestionClientes.table.getValueAt(fila, 3);
-		String fecha = dateObj.toString();
-		ventanaGestionClientes.textFieldFechaNacimientoCliente.setText(fecha);
+	}
+	
+	public void ponerFechaTablaEnCasillas(int fila) {
+		
+		Date date =  (Date) ventanaGestionClientes.table.getValueAt(fila, 3);
+		
+		LocalDate  localDate = date.toLocalDate();
+		
+		int day = localDate.getDayOfMonth();
+		int month = localDate.getMonthValue();
+		int year = localDate.getYear();
+		
+		System.out.println(year);
+		System.out.println(month);
+		System.out.println(day);
+		
+		ventanaGestionClientes.comboBoxYear.setSelectedIndex(year-1920);
+		ventanaGestionClientes.comboBoxMonth.setSelectedIndex(month);
+		ventanaGestionClientes.comboBoxDay.setSelectedIndex(day);
+		
+	}
+	
+	public String fechaNacimiento() {
+		
+		String fecha ="";
+		
+		fecha = ventanaGestionClientes.comboBoxYear.getSelectedItem().toString() + "-" + ventanaGestionClientes.comboBoxMonth.getSelectedItem().toString() + "-" + ventanaGestionClientes.comboBoxDay.getSelectedItem().toString();
+		
+		
+		return fecha;
 		
 	}
 

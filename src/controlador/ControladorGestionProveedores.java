@@ -25,7 +25,8 @@ public class ControladorGestionProveedores implements ActionListener {
 		this.ventanaGestionProveedores.btnRegistrarProveedores.addActionListener(this);
 		this.ventanaGestionProveedores.btnSeleccionar.addActionListener(this);
 		this.ventanaGestionProveedores.btnLimpiar.addActionListener(this);
-		
+		this.ventanaGestionProveedores.btnListaDeProveedores.addActionListener(this);
+		consultaProveedor.poblarTabla(ventanaGestionProveedores.table);
 	}
 	
 
@@ -39,6 +40,9 @@ public class ControladorGestionProveedores implements ActionListener {
 				int id = Integer.valueOf(ventanaGestionProveedores.textFieldBuscarProveedorPorId.getText());
 				
 				if(consultaProveedor.buscar(proveedor, id)) {
+					
+					ventanaGestionProveedores.borrarElementosTabla();
+					
 					//agregar valores a la tabla
 					ponerValoresProveedorEnTabla();
 					ventanaGestionProveedores.textFieldBuscarProveedorPorId.setText(null);
@@ -48,7 +52,7 @@ public class ControladorGestionProveedores implements ActionListener {
 				}
 				
 			}else {
-				JOptionPane.showMessageDialog(null, "Ingrese el ID del empleado");
+				JOptionPane.showMessageDialog(null, "Ingrese el ID del proveedor");
 			}
 			
 		}
@@ -81,6 +85,10 @@ public class ControladorGestionProveedores implements ActionListener {
 				ponerValoresEnModeloUsuario();
 				consultaProveedor.registrar(proveedor);
 				ventanaGestionProveedores.limpiarCasillas();
+				
+				ventanaGestionProveedores.borrarElementosTabla();
+				consultaProveedor.poblarTabla(ventanaGestionProveedores.table);
+				
 			}else {
 			
 			JOptionPane.showMessageDialog(null, "Complete todos los campos con el formato correcto");
@@ -94,10 +102,17 @@ public class ControladorGestionProveedores implements ActionListener {
 		
 		
 		if(e.getSource() == ventanaGestionProveedores.btnSeleccionar) {
+			
 			int fila = ventanaGestionProveedores.table.getSelectedRow();
 			ponerValoresTablaEnCasillas(fila);
+			ventanaGestionProveedores.borrarElementosTabla();
 		}
 		
+		
+		if(e.getSource() == ventanaGestionProveedores.btnListaDeProveedores) {
+			ventanaGestionProveedores.borrarElementosTabla();
+			consultaProveedor.poblarTabla(ventanaGestionProveedores.table);
+		}
 	}
 	
 	

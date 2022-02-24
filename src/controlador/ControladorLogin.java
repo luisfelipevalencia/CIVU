@@ -143,7 +143,7 @@ public class ControladorLogin implements ActionListener {
 		LocalDate date = LocalDate.now();
 		int mes = date.getMonthValue();
 		int dia = date.getDayOfMonth();
-		System.out.println(mes);
+		
 		ventanaPrincipal.textFieldFechaSistema.setText("Hoy es " + obtenerMes(mes)+ " " + dia + " " + "del año " + 2022 );
 		ventanaPrincipal.textFieldUsuarioConectado.setText(persona.getNombre());
 		ventanaPrincipal.setVisible(true);

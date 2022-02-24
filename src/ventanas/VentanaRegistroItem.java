@@ -28,15 +28,8 @@ public class VentanaRegistroItem extends JPanel {
 	public JTextField textFieldCargoUsuario;
 	public JTextField textFieldTelefonoUsuario;
 	public JTextField textFieldPasswordUsuario;
-	public JTextField textFieldBuscarUsuarioPorId;
-	public JTable table;
 	DefaultTableModel model;
 	public JButton btnRegistrar;
-	public JButton btnModificarUsuario;
-	public JButton btnEliminarUsuario;
-	public JButton btnBuscarUsuario;
-	public JButton btnLimpiar;
-	public JButton btnSeleccionar;
 
 	/**
 	 * Create the panel.
@@ -51,7 +44,7 @@ public class VentanaRegistroItem extends JPanel {
 		lblNewLabel.setBounds(30, 30, 260, 26);
 		add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Id");
+		JLabel lblNewLabel_1 = new JLabel("Id Producto");
 		lblNewLabel_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(30, 80, 261, 17);
 		add(lblNewLabel_1);
@@ -101,7 +94,7 @@ public class VentanaRegistroItem extends JPanel {
 		separator.setBounds(30, 123, 261, 2);
 		add(separator);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Nombre");
+		JLabel lblNewLabel_1_1 = new JLabel("Tipo");
 		lblNewLabel_1_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_1_1.setBounds(311, 80, 261, 17);
 		add(lblNewLabel_1_1);
@@ -143,9 +136,9 @@ public class VentanaRegistroItem extends JPanel {
 		separator_1.setBounds(311, 123, 261, 2);
 		add(separator_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("Fecha de Nacimiento (YYYY-MM-DD)");
+		JLabel lblNewLabel_1_2 = new JLabel("Marca");
 		lblNewLabel_1_2.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_2.setBounds(592, 80, 261, 17);
+		lblNewLabel_1_2.setBounds(311, 143, 261, 17);
 		add(lblNewLabel_1_2);
 		
 		textFieldFechaNacimientoUsuario = new JTextField();
@@ -258,15 +251,15 @@ public class VentanaRegistroItem extends JPanel {
 		textFieldFechaNacimientoUsuario.setBackground(new Color(255, 255, 255));
 		textFieldFechaNacimientoUsuario.setBorder(null);
 		textFieldFechaNacimientoUsuario.setColumns(10);
-		textFieldFechaNacimientoUsuario.setBounds(592, 99, 261, 20);
+		textFieldFechaNacimientoUsuario.setBounds(311, 162, 261, 20);
 		add(textFieldFechaNacimientoUsuario);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setForeground(new Color(0, 153, 255));
-		separator_2.setBounds(592, 123, 261, 2);
+		separator_2.setBounds(311, 186, 261, 2);
 		add(separator_2);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("Cargo");
+		JLabel lblNewLabel_1_3 = new JLabel("Id Proveedor");
 		lblNewLabel_1_3.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_1_3.setBounds(30, 143, 261, 17);
 		add(lblNewLabel_1_3);
@@ -309,9 +302,9 @@ public class VentanaRegistroItem extends JPanel {
 		separator_3.setBounds(30, 185, 261, 2);
 		add(separator_3);
 		
-		JLabel lblNewLabel_1_4 = new JLabel("Telefono");
+		JLabel lblNewLabel_1_4 = new JLabel("Precio Unidad");
 		lblNewLabel_1_4.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_4.setBounds(311, 143, 261, 17);
+		lblNewLabel_1_4.setBounds(30, 213, 261, 17);
 		add(lblNewLabel_1_4);
 		
 		textFieldTelefonoUsuario = new JTextField();
@@ -339,17 +332,17 @@ public class VentanaRegistroItem extends JPanel {
 		textFieldTelefonoUsuario.setBackground(new Color(255, 255, 255));
 		textFieldTelefonoUsuario.setBorder(null);
 		textFieldTelefonoUsuario.setColumns(10);
-		textFieldTelefonoUsuario.setBounds(311, 162, 261, 20);
+		textFieldTelefonoUsuario.setBounds(30, 232, 261, 20);
 		add(textFieldTelefonoUsuario);
 		
 		JSeparator separator_4 = new JSeparator();
 		separator_4.setForeground(new Color(0, 153, 255));
-		separator_4.setBounds(311, 185, 261, 2);
+		separator_4.setBounds(30, 255, 261, 2);
 		add(separator_4);
 		
-		JLabel lblNewLabel_1_5 = new JLabel("Password");
+		JLabel lblNewLabel_1_5 = new JLabel("Costo Unidad");
 		lblNewLabel_1_5.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_5.setBounds(592, 143, 261, 17);
+		lblNewLabel_1_5.setBounds(29, 278, 261, 17);
 		add(lblNewLabel_1_5);
 		
 		textFieldPasswordUsuario = new JTextField();
@@ -375,12 +368,12 @@ public class VentanaRegistroItem extends JPanel {
 		textFieldPasswordUsuario.setBackground(new Color(255, 255, 255));
 		textFieldPasswordUsuario.setBorder(null);
 		textFieldPasswordUsuario.setColumns(10);
-		textFieldPasswordUsuario.setBounds(592, 162, 261, 20);
+		textFieldPasswordUsuario.setBounds(29, 297, 261, 20);
 		add(textFieldPasswordUsuario);
 		
 		JSeparator separator_5 = new JSeparator();
 		separator_5.setForeground(new Color(0, 153, 255));
-		separator_5.setBounds(592, 185, 261, 2);
+		separator_5.setBounds(29, 320, 261, 2);
 		add(separator_5);
 		
 		btnRegistrar = new JButton("REGISTRAR");
@@ -388,123 +381,17 @@ public class VentanaRegistroItem extends JPanel {
 		btnRegistrar.setForeground(Color.WHITE);
 		btnRegistrar.setBorder(null);
 		btnRegistrar.setBackground(new Color(0,51,153));
-		btnRegistrar.setBounds(30, 209, 113, 25);
+		btnRegistrar.setBounds(30, 447, 113, 25);
 		add(btnRegistrar);
 		
-		btnModificarUsuario = new JButton("MODIFICAR");
-		btnModificarUsuario.setForeground(Color.WHITE);
-		btnModificarUsuario.setFont(new Font("Roboto", Font.BOLD, 12));
-		btnModificarUsuario.setBorder(null);
-		btnModificarUsuario.setBackground(new Color(0, 51, 153));
-		btnModificarUsuario.setBounds(152, 209, 113, 25);
-		add(btnModificarUsuario);
-		
-		btnEliminarUsuario = new JButton("ELIMINAR");
-		btnEliminarUsuario.setForeground(Color.WHITE);
-		btnEliminarUsuario.setFont(new Font("Roboto", Font.BOLD, 12));
-		btnEliminarUsuario.setBorder(null);
-		btnEliminarUsuario.setBackground(new Color(0, 51, 153));
-		btnEliminarUsuario.setBounds(275, 209, 113, 25);
-		add(btnEliminarUsuario);
-		
 		JSeparator separator_6 = new JSeparator();
-		separator_6.setBounds(30, 245, 828, 2);
+		separator_6.setBounds(30, 434, 828, 2);
 		add(separator_6);
-		
-		textFieldBuscarUsuarioPorId = new JTextField();
-		textFieldBuscarUsuarioPorId.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				
-				char validar=e.getKeyChar();
-	
-				
-				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
-				}
-				
-				if(e.getKeyChar()>32 && e.getKeyChar()<48) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
-				}
-				
-				
-				if(textFieldBuscarUsuarioPorId.getText().length()>= 15) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar 15 numeros o menos");
-				}
-			}
-		});
-		textFieldBuscarUsuarioPorId.setFont(new Font("Roboto", Font.PLAIN, 14));
-		textFieldBuscarUsuarioPorId.setColumns(10);
-		textFieldBuscarUsuarioPorId.setBorder(null);
-		textFieldBuscarUsuarioPorId.setBackground(Color.WHITE);
-		textFieldBuscarUsuarioPorId.setBounds(30, 260, 700, 20);
-		add(textFieldBuscarUsuarioPorId);
-		
-		JSeparator separator_7 = new JSeparator();
-		separator_7.setForeground(new Color(0, 153, 255));
-		separator_7.setBounds(30, 283, 700, 2);
-		add(separator_7);
-		
-		btnBuscarUsuario = new JButton("BUSCAR");
-		btnBuscarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnBuscarUsuario.setForeground(Color.WHITE);
-		btnBuscarUsuario.setFont(new Font("Roboto", Font.BOLD, 12));
-		btnBuscarUsuario.setBorder(null);
-		btnBuscarUsuario.setBackground(new Color(0, 51, 153));
-		btnBuscarUsuario.setBounds(740, 260, 113, 25);
-		add(btnBuscarUsuario);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(30, 301, 823, 130);
-		add(scrollPane_1);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane_1.setViewportView(scrollPane);
-		scrollPane.setBackground(Color.WHITE);
-		
-		table = new JTable();
-		table.setBackground(Color.WHITE);
 		
 		model = new DefaultTableModel();
 		Object[] column = {"ID","Nombre","Telefono","Cargo","Password","FechaNacimiento"};
 		Object[] row = new Object[0];
 		model.setColumnIdentifiers(column);
-		table.setModel(model);
-		
-		scrollPane.setViewportView(table);
-		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		
-		btnSeleccionar = new JButton("SELECCIONAR");
-		btnSeleccionar.setForeground(Color.WHITE);
-		btnSeleccionar.setFont(new Font("Roboto", Font.BOLD, 12));
-		btnSeleccionar.setBorder(null);
-		btnSeleccionar.setBackground(new Color(0, 51, 153));
-		btnSeleccionar.setBounds(30, 442, 113, 25);
-		add(btnSeleccionar);
-		
-		btnLimpiar = new JButton("LIMPIAR");
-		btnLimpiar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnLimpiar.setForeground(Color.WHITE);
-		btnLimpiar.setFont(new Font("Roboto", Font.BOLD, 12));
-		btnLimpiar.setBorder(null);
-		btnLimpiar.setBackground(new Color(0, 51, 153));
-		btnLimpiar.setBounds(398, 209, 113, 25);
-		add(btnLimpiar);
 
 	}
 	
@@ -515,7 +402,7 @@ public class VentanaRegistroItem extends JPanel {
 		textFieldCargoUsuario.setText(null);
 		textFieldTelefonoUsuario.setText(null);
 		textFieldPasswordUsuario.setText(null);
-		textFieldBuscarUsuarioPorId.setText(null);
+		
 	}
 	
 	public boolean validarFormatoFecha() {

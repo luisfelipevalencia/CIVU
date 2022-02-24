@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultaCliente extends Conexion {
 	
@@ -202,6 +204,46 @@ public class ConsultaCliente extends Conexion {
 		            }
 		        }
 	        
+	    	
+	    }
+	    
+	    
+ public void poblarTabla(JTable table) {
+	    	
+	    	
+	        Connection con = getConnection();
+	        String sql = "SELECT * FROM cliente";
+	        
+	        try{
+	        	Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				
+	           
+	           while(rs.next()){
+	        	   
+	        	int cedula = rs.getInt("cedula_cliente");   
+	        	String nombre = rs.getString("nombre_cliente");
+	        	String contacto = rs.getString("contacto_cliente");
+	        	Date dateObject = rs.getDate("fecha_nacimiento_cliente");
+	        	
+	        	Object tbData[] = {cedula, nombre, contacto, dateObject};
+	        	
+	        	DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+	        	
+	        	tblModel.addRow(tbData);
+	           }
+	        	
+	           
+	        }catch(SQLException e) {
+	            System.err.println(e);
+
+	        } finally{
+	            try{
+	                con.close();
+	            }catch (SQLException e){
+	                System.err.println(e);
+	            }
+	        }
 	    	
 	    }
 	

@@ -19,13 +19,14 @@ import javax.swing.JScrollPane;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
+import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+import javax.swing.DefaultComboBoxModel;
 
 public class VentanaGestionUsuarios extends JPanel {
 	
 	public JTextField textFieldIdUsuario;
 	public JTextField textFieldNombreUsuario;
-	public JTextField textFieldFechaNacimientoUsuario;
-	public JTextField textFieldCargoUsuario;
 	public JTextField textFieldTelefonoUsuario;
 	public JTextField textFieldPasswordUsuario;
 	public JTextField textFieldBuscarUsuarioPorId;
@@ -37,6 +38,11 @@ public class VentanaGestionUsuarios extends JPanel {
 	public JButton btnBuscarUsuario;
 	public JButton btnLimpiar;
 	public JButton btnSeleccionar;
+	public JButton btnTraerInfoDB;
+	public JComboBox comboBoxCargo;
+	public JComboBox comboBoxYear;
+	public JComboBox comboBoxMonth;
+	public JComboBox comboBoxDay;
 
 	/**
 	 * Create the panel.
@@ -123,11 +129,11 @@ public class VentanaGestionUsuarios extends JPanel {
 				}
 				
 				
-				if(textFieldNombreUsuario.getText().length()>= 30) {
+				if(textFieldNombreUsuario.getText().length()> 40) {
 					getToolkit().beep();
 					e.consume();
 					
-					JOptionPane.showMessageDialog(null, "Ingresar 30 caracteres o menos");
+					JOptionPane.showMessageDialog(null, "Ingresar 40 caracteres o menos");
 				}
 			}
 		});
@@ -145,121 +151,8 @@ public class VentanaGestionUsuarios extends JPanel {
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Fecha de Nacimiento (YYYY-MM-DD)");
 		lblNewLabel_1_2.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_2.setBounds(592, 80, 261, 17);
+		lblNewLabel_1_2.setBounds(592, 80, 236, 17);
 		add(lblNewLabel_1_2);
-		
-		textFieldFechaNacimientoUsuario = new JTextField();
-		textFieldFechaNacimientoUsuario.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				
-				char caracter = e.getKeyChar();
-				String cadena=textFieldFechaNacimientoUsuario.getText();
-				
-				if(Character.isLetter(caracter) || (e.getKeyChar()>=32 && e.getKeyChar()<45) || e.getKeyChar()==46 || e.getKeyChar()==47 || (e.getKeyChar()>57 && e.getKeyChar()<=126)) {
-					
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros o el caracter '-'");
-					}
-				}
-				
-				if(cadena.length()== 0 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");
-					}
-				}
-				
-				if(cadena.length()== 1 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");
-					}
-				}
-					
-				if(cadena.length()== 2 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");	
-					}
-				}
-				
-				if(cadena.length()== 3 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");	
-					}
-				}
-				
-				
-				if(cadena.length()== 4 && e.getKeyChar()!='-') {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese el caracter '-'");	
-					}
-				}
-				
-				if(cadena.length()== 5 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");	
-					}
-				}
-				
-				if(cadena.length()== 6 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");	
-					}
-				}
-				
-				if(cadena.length()== 7 && e.getKeyChar()!='-') {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese el caracter '-'");	
-					}
-				}
-				
-				if(cadena.length()== 8 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");	
-					}
-				}
-				
-				if(cadena.length()== 9 && (e.getKeyChar()<48 || e.getKeyChar()>57)) {
-					if(e.getKeyChar()!=8) {
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingrese un numero");	
-					}	
-				}
-				
-				if(cadena.length()>= 10) {
-					getToolkit().beep();
-					e.consume();
-					JOptionPane.showMessageDialog(null, "No puede ingresar mas caracteres");
-				}
-				
-			}
-		});
-		textFieldFechaNacimientoUsuario.setFont(new Font("Roboto", Font.PLAIN, 14));
-		textFieldFechaNacimientoUsuario.setBackground(new Color(255, 255, 255));
-		textFieldFechaNacimientoUsuario.setBorder(null);
-		textFieldFechaNacimientoUsuario.setColumns(10);
-		textFieldFechaNacimientoUsuario.setBounds(592, 99, 261, 20);
-		add(textFieldFechaNacimientoUsuario);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setForeground(new Color(0, 153, 255));
@@ -270,39 +163,6 @@ public class VentanaGestionUsuarios extends JPanel {
 		lblNewLabel_1_3.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_1_3.setBounds(30, 143, 261, 17);
 		add(lblNewLabel_1_3);
-		
-		textFieldCargoUsuario = new JTextField();
-		textFieldCargoUsuario.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				
-				char validar=e.getKeyChar();
-				
-				if(Character.isLetter(validar)==false) {
-					
-					if(e.getKeyChar()!=32 && e.getKeyChar()!=8){
-						getToolkit().beep();
-						e.consume();
-						JOptionPane.showMessageDialog(null, "Ingresar solo letras");
-					}
-				}
-				
-				
-				if(textFieldCargoUsuario.getText().length()>= 20) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar 20 caracteres o menos");
-				}
-				
-			}
-		});
-		textFieldCargoUsuario.setFont(new Font("Roboto", Font.PLAIN, 14));
-		textFieldCargoUsuario.setBackground(new Color(255, 255, 255));
-		textFieldCargoUsuario.setBorder(null);
-		textFieldCargoUsuario.setColumns(10);
-		textFieldCargoUsuario.setBounds(30, 162, 261, 20);
-		add(textFieldCargoUsuario);
 		
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setForeground(new Color(0, 153, 255));
@@ -475,9 +335,11 @@ public class VentanaGestionUsuarios extends JPanel {
 		scrollPane.setBackground(Color.WHITE);
 		
 		table = new JTable();
+		table.setFont(new Font("Roboto", Font.PLAIN, 14));
 		table.setBackground(Color.WHITE);
 		
 		model = new DefaultTableModel();
+		
 		Object[] column = {"ID","Nombre","Telefono","Cargo","Password","FechaNacimiento"};
 		Object[] row = new Object[0];
 		model.setColumnIdentifiers(column);
@@ -485,6 +347,8 @@ public class VentanaGestionUsuarios extends JPanel {
 		
 		scrollPane.setViewportView(table);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		
 		
 		btnSeleccionar = new JButton("SELECCIONAR");
 		btnSeleccionar.setForeground(Color.WHITE);
@@ -505,95 +369,128 @@ public class VentanaGestionUsuarios extends JPanel {
 		btnLimpiar.setBackground(new Color(0, 51, 153));
 		btnLimpiar.setBounds(398, 209, 113, 25);
 		add(btnLimpiar);
+		
+		btnTraerInfoDB = new JButton("LISTA DE USUARIOS");
+		btnTraerInfoDB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnTraerInfoDB.setForeground(Color.WHITE);
+		btnTraerInfoDB.setFont(new Font("Roboto", Font.BOLD, 12));
+		btnTraerInfoDB.setBorder(null);
+		btnTraerInfoDB.setBackground(new Color(0, 51, 153));
+		btnTraerInfoDB.setBounds(152, 442, 138, 25);
+		add(btnTraerInfoDB);
+		
+		comboBoxCargo = new JComboBox();
+		comboBoxCargo.setBackground(Color.WHITE);
+		comboBoxCargo.setFont(new Font("Roboto", Font.PLAIN, 14));
+		comboBoxCargo.setModel(new DefaultComboBoxModel(new String[] {"", "administrador", "vendedor"}));
+		comboBoxCargo.setBorder(null);
+		comboBoxCargo.setBounds(30, 162, 261, 20);
+		add(comboBoxCargo);
+		
+		comboBoxYear = new JComboBox();
+		comboBoxYear.setBackground(Color.WHITE);
+		comboBoxYear.setFont(new Font("Roboto", Font.PLAIN, 12));
+		comboBoxYear.setModel(new DefaultComboBoxModel(new String[] {"", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"}));
+		comboBoxYear.setBorder(null);
+		comboBoxYear.setBounds(592, 99, 56, 20);
+		add(comboBoxYear);
+		
+		JLabel lblNewLabel_2 = new JLabel("-");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(658, 99, 14, 20);
+		add(lblNewLabel_2);
+		
+		comboBoxMonth = new JComboBox();
+		comboBoxMonth.setBackground(Color.WHITE);
+		comboBoxMonth.setFont(new Font("Roboto", Font.PLAIN, 12));
+		comboBoxMonth.setModel(new DefaultComboBoxModel(new String[] {"", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
+		comboBoxMonth.setBorder(null);
+		comboBoxMonth.setBounds(682, 98, 56, 20);
+		add(comboBoxMonth);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("-");
+		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_1.setBounds(748, 99, 14, 20);
+		add(lblNewLabel_2_1);
+		
+		comboBoxDay = new JComboBox();
+		comboBoxDay.setBackground(Color.WHITE);
+		comboBoxDay.setFont(new Font("Roboto", Font.PLAIN, 12));
+		comboBoxDay.setModel(new DefaultComboBoxModel(new String[] {"", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+		comboBoxDay.setBorder(null);
+		comboBoxDay.setBounds(772, 98, 56, 20);
+		add(comboBoxDay);
 
 	}
+	
+	
+	public boolean validarComboBox(JComboBox comboBox) {
+		
+		boolean vacio = true;
+		
+		String valor = comboBox.getSelectedItem().toString();
+		
+		if(valor != "") {
+			
+			vacio= false;
+		}
+			
+		return vacio;
+	}
+	
 	
 	public void limpiarCasillas() {
 		textFieldIdUsuario.setText(null);
 		textFieldNombreUsuario.setText(null);
-		textFieldFechaNacimientoUsuario.setText(null);
-		textFieldCargoUsuario.setText(null);
+		
+		//arregla los jcombobox
+		comboBoxYear.setSelectedIndex(0);
+		comboBoxMonth.setSelectedIndex(0);
+		comboBoxDay.setSelectedIndex(0);
+		comboBoxCargo.setSelectedIndex(0);
+		
 		textFieldTelefonoUsuario.setText(null);
 		textFieldPasswordUsuario.setText(null);
 		textFieldBuscarUsuarioPorId.setText(null);
 	}
 	
-	public boolean validarFormatoFecha() {
-		
-		String fecha = textFieldFechaNacimientoUsuario.getText();
-		
-		System.out.println("entre al metodo validarformatofecha");
-		
-		String yearDigits = fecha.substring(0, 4) ;
-		String monthDigits = fecha.substring(5, 7);
-		String dayDigits = fecha.substring(8, 10);
-		char primerGuion = fecha.charAt(4);
-		char segundoGuion = fecha.charAt(7);
- 		
-		boolean formatoValido = false; 
-		
-		
-		if(yearDigits.matches("[+-]?\\d*(\\.\\d+)?")) {
-			
-			if(primerGuion == '-') {
-				
-				if(monthDigits.matches("[+-]?\\d*(\\.\\d+)?")) {
-					
-					if(segundoGuion == '-') {
-						
-						if(dayDigits.matches("[+-]?\\d*(\\.\\d+)?")) {
-							
-							formatoValido = true;
-							
-						}else {
-							formatoValido=false;
-						}
-						
-					}else {
-						formatoValido=false;
-					}
-					
-				}else {
-					formatoValido=false;
-				}
-				
-			}else {
-				formatoValido=false;
-			}
-			
-		}else {
-			formatoValido= false;
-		}
-		
-		System.out.println("si entro al metodo validar formato");
-		return formatoValido;
-		
-	}
+
 	
 	public boolean validarCamposVacios() {
 		boolean camposVacios=false;
 		
-		if(textFieldIdUsuario.getText().isEmpty() && textFieldNombreUsuario.getText().isEmpty() && textFieldFechaNacimientoUsuario.getText().isEmpty() && textFieldCargoUsuario.getText().isEmpty() && textFieldTelefonoUsuario.getText().isEmpty() && textFieldPasswordUsuario.getText().isEmpty()) {
+		if(textFieldIdUsuario.getText().isEmpty() || textFieldNombreUsuario.getText().isEmpty() || validarComboBox(comboBoxYear) || validarComboBox(comboBoxMonth) || validarComboBox(comboBoxDay) || validarComboBox(comboBoxCargo) || textFieldTelefonoUsuario.getText().isEmpty() && textFieldPasswordUsuario.getText().isEmpty()) {
 			
 			camposVacios=true;
 		}else {
 			camposVacios=false;
 		}
 		
-		System.out.println("Si entro al metodo validadr camposvacios");
-		System.out.println(camposVacios);
 		return camposVacios;
 	}
 	
 	public boolean validarCamposLlenos() {
 		boolean camposLlenos=false;
 		
-		if(textFieldIdUsuario.getText().isEmpty()==false && textFieldIdUsuario.getText().isEmpty()==false && textFieldNombreUsuario.getText().isEmpty()==false && textFieldFechaNacimientoUsuario.getText().isEmpty()==false && textFieldCargoUsuario.getText().isEmpty()==false && textFieldTelefonoUsuario.getText().isEmpty()==false && textFieldPasswordUsuario.getText().isEmpty()==false) {
+		if(textFieldIdUsuario.getText().isEmpty()==false && textFieldNombreUsuario.getText().isEmpty()==false && validarComboBox(comboBoxYear)==false && validarComboBox(comboBoxMonth)==false && validarComboBox(comboBoxDay)==false && validarComboBox(comboBoxCargo)==false && validarComboBox(comboBoxCargo)==false && textFieldTelefonoUsuario.getText().isEmpty()==false && textFieldPasswordUsuario.getText().isEmpty()==false) {
 			camposLlenos = true;
 		}else {
 			camposLlenos = false;
 		}
 			
 		return camposLlenos;
+	}
+	
+	
+	public void borrarElementosTabla() {
+		 
+        int numeroFilasBorrar = model.getRowCount();
+        //remove rows from the bottom one by one
+        for (int i = numeroFilasBorrar - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
 	}
 }

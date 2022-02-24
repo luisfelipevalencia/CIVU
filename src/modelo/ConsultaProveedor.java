@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultaProveedor extends Conexion{
 	
@@ -202,6 +204,46 @@ public class ConsultaProveedor extends Conexion{
 		            }
 		        }
 	        
+	    	
+	    }
+	    
+	    
+	    public void poblarTabla(JTable table) {
+	    	
+	    	
+	        Connection con = getConnection();
+	        String sql = "SELECT * FROM proveedores";
+	        
+	        try{
+	        	Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				
+	           
+	           while(rs.next()){
+	        	   
+	        	int cedula = rs.getInt("id_proveedor");   
+	        	String nombre = rs.getString("nombre_proveedor");
+	        	String direccion = rs.getString("direccion_proveedor");
+	        	String contacto = rs.getString("contacto_proveedor");
+	        	
+	        	Object tbData[] = {cedula, nombre, direccion, contacto};
+	        	
+	        	DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+	        	
+	        	tblModel.addRow(tbData);
+	           }
+	        	
+	           
+	        }catch(SQLException e) {
+	            System.err.println(e);
+
+	        } finally{
+	            try{
+	                con.close();
+	            }catch (SQLException e){
+	                System.err.println(e);
+	            }
+	        }
 	    	
 	    }
 	
