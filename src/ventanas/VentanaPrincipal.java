@@ -37,26 +37,9 @@ public class VentanaPrincipal extends JFrame {
 	public JButton btnVentas;
 	public JButton btnReportes;
 	public JButton btnSalir;
+	public JButton btnAbonos;
 
 	
-	
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 	/**
 	 * Create the frame.
 	 */
@@ -222,7 +205,30 @@ public class VentanaPrincipal extends JFrame {
 		btnVentas.setBorder(null);
 		btnVentas.setBackground(new Color(0, 51, 102));
 		
+		btnAbonos = new JButton("   Abonos");
+		btnAbonos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAbonos.setBackground(new Color(51, 51, 225));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAbonos.setBackground(new Color(0, 51, 102));
+			}
+		});
+		btnAbonos.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/imagenes/icons8-add-dollar-24.png")));
+		btnAbonos.setBounds(25, 372, 275, 45);
+		panelLateral.add(btnAbonos);
+		btnAbonos.setHorizontalAlignment(SwingConstants.LEFT);
+		btnAbonos.setForeground(Color.WHITE);
+		btnAbonos.setFont(new Font("Roboto", Font.BOLD, 16));
+		btnAbonos.setFocusPainted(false);
+		btnAbonos.setBorder(null);
+		btnAbonos.setBackground(new Color(0, 51, 102));
+		
 		btnReportes = new JButton("   Reportes");
+		btnReportes.setBounds(25, 417, 275, 45);
+		panelLateral.add(btnReportes);
 		btnReportes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -236,14 +242,14 @@ public class VentanaPrincipal extends JFrame {
 		btnReportes.setFocusPainted(false);
 		btnReportes.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/imagenes/iconReportes.png")));
 		btnReportes.setHorizontalAlignment(SwingConstants.LEFT);
-		btnReportes.setBounds(25, 372, 275, 45);
-		panelLateral.add(btnReportes);
 		btnReportes.setForeground(Color.WHITE);
 		btnReportes.setFont(new Font("Roboto", Font.BOLD, 16));
 		btnReportes.setBorder(null);
 		btnReportes.setBackground(new Color(0, 51, 102));
 		
 		btnSalir = new JButton("   Salir");
+		btnSalir.setBounds(25, 462, 275, 45);
+		panelLateral.add(btnSalir);
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -257,8 +263,6 @@ public class VentanaPrincipal extends JFrame {
 		btnSalir.setFocusPainted(false);
 		btnSalir.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/imagenes/iconsBotonSalir.png")));
 		btnSalir.setHorizontalAlignment(SwingConstants.LEFT);
-		btnSalir.setBounds(25, 417, 275, 45);
-		panelLateral.add(btnSalir);
 		btnSalir.setForeground(Color.WHITE);
 		btnSalir.setFont(new Font("Roboto", Font.BOLD, 16));
 		btnSalir.setBorder(null);

@@ -51,7 +51,7 @@ public class ControladorLogin implements ActionListener {
 		String usuario = ventanaLogin.usuarioIngresado();
 		String password = ventanaLogin.passwordIngresado();
 		
-		if(password.length() == 0 || usuario.length() == 0 || (usuario.equals("Ingrese su usuario") && password.equals("**********"))) {
+		if(password.length() == 0 || usuario.length() == 0 || (usuario.equals("Ingrese su usuario") || password.equals("**********"))) {
 			
 			JOptionPane.showMessageDialog(null, "Ingrese su Usuario y Password");
 			

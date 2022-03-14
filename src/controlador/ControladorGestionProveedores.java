@@ -2,7 +2,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +12,7 @@ import modelo.ConsultaProveedor;
 import modelo.Proveedor;
 import ventanas.VentanaGestionProveedores;
 
-public class ControladorGestionProveedores implements ActionListener {
+public class ControladorGestionProveedores implements ActionListener, MouseListener {
 	
 	VentanaGestionProveedores ventanaGestionProveedores;
 	Proveedor proveedor = new Proveedor();
@@ -23,9 +24,9 @@ public class ControladorGestionProveedores implements ActionListener {
 		this.ventanaGestionProveedores.btnEliminarProveedores.addActionListener(this);
 		this.ventanaGestionProveedores.btnModificarProveedores.addActionListener(this);
 		this.ventanaGestionProveedores.btnRegistrarProveedores.addActionListener(this);
-		this.ventanaGestionProveedores.btnSeleccionar.addActionListener(this);
 		this.ventanaGestionProveedores.btnLimpiar.addActionListener(this);
 		this.ventanaGestionProveedores.btnListaDeProveedores.addActionListener(this);
+		this.ventanaGestionProveedores.table.addMouseListener(this);
 		consultaProveedor.poblarTabla(ventanaGestionProveedores.table);
 	}
 	
@@ -63,6 +64,10 @@ public class ControladorGestionProveedores implements ActionListener {
 				int id = Integer.valueOf(ventanaGestionProveedores.textFieldIdProveedores.getText());
 				consultaProveedor.eliminar(id);
 				ventanaGestionProveedores.limpiarCasillas();
+				
+				ventanaGestionProveedores.borrarElementosTabla();
+				consultaProveedor.poblarTabla(ventanaGestionProveedores.table);
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "Ingrese el ID del proveedor que desea eliminar");
 			}
@@ -74,6 +79,10 @@ public class ControladorGestionProveedores implements ActionListener {
 				ponerValoresEnModeloUsuario();
 				consultaProveedor.modificar(proveedor);
 				ventanaGestionProveedores.limpiarCasillas();
+				
+				ventanaGestionProveedores.borrarElementosTabla();
+				consultaProveedor.poblarTabla(ventanaGestionProveedores.table);
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "Complete todos los campos con el formato correcto");
 			}
@@ -98,14 +107,6 @@ public class ControladorGestionProveedores implements ActionListener {
 		
 		if(e.getSource() == ventanaGestionProveedores.btnLimpiar) {
 			ventanaGestionProveedores.limpiarCasillas();
-		}
-		
-		
-		if(e.getSource() == ventanaGestionProveedores.btnSeleccionar) {
-			
-			int fila = ventanaGestionProveedores.table.getSelectedRow();
-			ponerValoresTablaEnCasillas(fila);
-			ventanaGestionProveedores.borrarElementosTabla();
 		}
 		
 		
@@ -154,6 +155,49 @@ public class ControladorGestionProveedores implements ActionListener {
 		ventanaGestionProveedores.textFieldDireccionProveedores.setText((String) ventanaGestionProveedores.table.getValueAt(fila, 2));
 		ventanaGestionProveedores.textFieldTelefonoProveedores.setText((String) ventanaGestionProveedores.table.getValueAt(fila, 3));
 
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getSource() == ventanaGestionProveedores.table) {
+			
+			int fila = ventanaGestionProveedores.table.getSelectedRow();
+			ponerValoresTablaEnCasillas(fila);
+			ventanaGestionProveedores.borrarElementosTabla();
+			
+		}
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

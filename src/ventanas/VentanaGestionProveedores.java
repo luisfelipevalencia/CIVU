@@ -33,7 +33,6 @@ public class VentanaGestionProveedores extends JPanel {
 	public JButton btnModificarProveedores;
 	public JButton btnEliminarProveedores;
 	public JButton btnBuscarProveedores;
-	public JButton btnSeleccionar;
 	public JButton btnLimpiar;
 	public JButton btnListaDeProveedores;
 
@@ -50,7 +49,7 @@ public class VentanaGestionProveedores extends JPanel {
 		lblNewLabel.setBounds(30, 30, 260, 26);
 		add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Id");
+		JLabel lblNewLabel_1 = new JLabel("ID Proveedor");
 		lblNewLabel_1.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(30, 80, 261, 17);
 		add(lblNewLabel_1);
@@ -300,14 +299,14 @@ public class VentanaGestionProveedores extends JPanel {
 		btnBuscarProveedores.setBounds(740, 260, 113, 25);
 		add(btnBuscarProveedores);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(30, 301, 823, 130);
-		add(scrollPane_1);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane_1.setViewportView(scrollPane);
+		scrollPane.setBounds(30, 301, 823, 134);
+		add(scrollPane);
+		
+
 		
 		table = new JTable();
+		table.setFont(new Font("Roboto", Font.PLAIN, 13));
 		table.setBackground(Color.WHITE);
 		
 		model = new DefaultTableModel();
@@ -318,14 +317,6 @@ public class VentanaGestionProveedores extends JPanel {
 		
 		scrollPane.setViewportView(table);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		
-		btnSeleccionar = new JButton("SELECCIONAR");
-		btnSeleccionar.setForeground(Color.WHITE);
-		btnSeleccionar.setFont(new Font("Roboto", Font.BOLD, 12));
-		btnSeleccionar.setBorder(null);
-		btnSeleccionar.setBackground(new Color(0, 51, 153));
-		btnSeleccionar.setBounds(30, 442, 113, 25);
-		add(btnSeleccionar);
 		
 		btnLimpiar = new JButton("LIMPIAR");
 		btnLimpiar.setForeground(Color.WHITE);
@@ -340,7 +331,7 @@ public class VentanaGestionProveedores extends JPanel {
 		btnListaDeProveedores.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnListaDeProveedores.setBorder(null);
 		btnListaDeProveedores.setBackground(new Color(0, 51, 153));
-		btnListaDeProveedores.setBounds(153, 442, 163, 25);
+		btnListaDeProveedores.setBounds(30, 442, 163, 25);
 		add(btnListaDeProveedores);
 
 	}
