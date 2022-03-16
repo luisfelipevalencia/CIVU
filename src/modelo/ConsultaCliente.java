@@ -208,7 +208,7 @@ public class ConsultaCliente extends Conexion {
 	    }
 	    
 	    
- public void poblarTabla(JTable table) {
+	    public void poblarTabla(JTable table) {
 	    	
 	    	
 	        Connection con = getConnection();
@@ -246,7 +246,74 @@ public class ConsultaCliente extends Conexion {
 	        }
 	    	
 	    }
-	
-	
+ 
+ 
+		public String obtenerNombreUsuario(int id) {
+			String nombre="";
+			
+	        Connection con = getConnection();
+	        String sql = "SELECT * FROM cliente WHERE cedula_cliente='"+id+"' ";
+	        
+	        try{
+	        	
+	        	
+	        	Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				
+				if(rs.next()) {
+					nombre = rs.getString("nombre_cliente");
+				}
 
+	        	
+	           
+	        }catch(SQLException e) {
+	            System.err.println(e);
+
+	        } finally{
+	            try{
+	                con.close();
+	            }catch (SQLException e){
+	                System.err.println(e);
+	            }
+	        }
+			return nombre;
+		}
+		
+		
+		public int obtenerIdCliente(int idReserva) {
+			int idCliente=0;
+			
+	        Connection con = getConnection();
+	        String sql = "SELECT cedula_cliente FROM reservas WHERE id_reserva='"+idReserva+"'";
+	        
+	        try{
+	        	
+	        	
+	        	Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				
+				if(rs.next()) {
+					idCliente = rs.getInt("cedula_cliente");
+				}
+
+	        	
+	           
+	        }catch(SQLException e) {
+	            System.err.println(e);
+
+	        } finally{
+	            try{
+	                con.close();
+	            }catch (SQLException e){
+	                System.err.println(e);
+	            }
+	        }
+	        
+	        
+			return idCliente;
+				
+		}
+		
+	
+ 	
 }

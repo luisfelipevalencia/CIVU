@@ -49,17 +49,26 @@ public class ControladorGestionInventario implements ActionListener, MouseListen
 		}
 		
 		if(e.getSource() == ventanaGestionInventario.btnRegistrarItem) {
-			consultaInventario.registrar(ventanaGestionInventario);
-			ventanaGestionInventario.limpiarCasillas();
-			ventanaGestionInventario.borrarElementosTabla();
-			consultaInventario.poblarTabla(ventanaGestionInventario.table);
+			if(ventanaGestionInventario.validarCamposVacios()==false) {
+				consultaInventario.registrar(ventanaGestionInventario);
+				ventanaGestionInventario.limpiarCasillas();
+				ventanaGestionInventario.borrarElementosTabla();
+				consultaInventario.poblarTabla(ventanaGestionInventario.table);
+			}else {
+				JOptionPane.showMessageDialog(null, "Complete todos los campos");
+			}
 		}
 		
 		if(e.getSource() == ventanaGestionInventario.btnModificarItem) {
-			consultaInventario.modificar(ventanaGestionInventario);
-			ventanaGestionInventario.limpiarCasillas();
-			ventanaGestionInventario.borrarElementosTabla();
-			consultaInventario.poblarTabla(ventanaGestionInventario.table);
+			
+			if(ventanaGestionInventario.validarCamposVacios()==false) {
+				consultaInventario.modificar(ventanaGestionInventario);
+				ventanaGestionInventario.limpiarCasillas();
+				ventanaGestionInventario.borrarElementosTabla();
+				consultaInventario.poblarTabla(ventanaGestionInventario.table);
+			}else {
+				JOptionPane.showMessageDialog(null, "Complete todos los campos");
+			}
 		}
 		
 		if(e.getSource() == ventanaGestionInventario.btnEliminarItem) {

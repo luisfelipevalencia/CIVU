@@ -62,6 +62,51 @@ public class ConsultaAbonosReservas extends Conexion {
 	    }
 	 
 	 
+	 public void buscarReserva(VentanaAbonosReservas ventanaAbono, JTable table) {
+	    	
+	    	int cedula = Integer.parseInt(ventanaAbono.textFieldBuscarReserva.getText());
+	        Connection con = getConnection();
+	        String sql = "SELECT * FROM reservas where cedula_cliente='"+cedula+"' ORDER BY id_reserva";
+	        
+	        try{
+	        	Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				
+	           
+	           while(rs.next()){
+	        	   
+	        	int idReserva = rs.getInt("id_reserva");
+	        	int cedulaCliente = rs.getInt("cedula_cliente");
+	        	int cedulaEmpleado = rs.getInt("cedula_empleado");
+	        	Date fechaReserva = rs.getDate("fecha_reserva");
+	        	int saldoPendiente = rs.getInt("saldo_pendiente");
+	        	String estadoReserva = rs.getString("estado_reserva");
+	        	int totalReserva = rs.getInt("total_reserva");
+	        	int descuento = rs.getInt("descuento");
+	        	
+
+	        	Object tbData[] = {idReserva, cedulaCliente, fechaReserva, saldoPendiente, totalReserva, estadoReserva};
+	        	
+	        	DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+	        	
+	        	tblModel.addRow(tbData);
+	           }
+	        	
+	           
+	        }catch(SQLException e) {
+	            System.err.println(e);
+
+	        } finally{
+	            try{
+	                con.close();
+	            }catch (SQLException e){
+	                System.err.println(e);
+	            }
+	        }
+	    	
+	    }
+	 
+	 
 		public boolean registrarAbono(VentanaAbonosReservas ventanaAbonos){
 			
 			int idReserva = Integer.parseInt(ventanaAbonos.textFieldIdReservaAbonos.getText());
@@ -146,6 +191,48 @@ public class ConsultaAbonosReservas extends Conexion {
 		    	
 		        Connection con = getConnection();
 		        String sql = "SELECT * FROM abonos ORDER BY id_abono";
+		        
+		        try{
+		        	Statement st = con.createStatement();
+					ResultSet rs = st.executeQuery(sql);
+					
+		           
+		           while(rs.next()){
+		        	   
+		        	int idReserva = rs.getInt("id_reserva");
+		        	int idAbono = rs.getInt("id_abono");
+		        	Date fechaAbono = rs.getDate("fecha_abono");
+		        	int cantidadAbono = rs.getInt("cantidad_abono");
+		        	
+
+		        	Object tbData[] = {idAbono, idReserva, cantidadAbono,fechaAbono};
+		        	
+		        	DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+		        	
+		        	tblModel.addRow(tbData);
+		           }
+		        	
+		           
+		        }catch(SQLException e) {
+		            System.err.println(e);
+
+		        } finally{
+		            try{
+		                con.close();
+		            }catch (SQLException e){
+		                System.err.println(e);
+		            }
+		        }
+		    	
+		    }
+		 
+		 
+		 public void buscarAbono(VentanaAbonosReservas ventanaAbono, JTable table) {
+		    	
+			 	int id = Integer.parseInt(ventanaAbono.textFieldBuscarAbono.getText());
+			 
+		        Connection con = getConnection();
+		        String sql = "SELECT * FROM abonos WHERE id_reserva='"+id+"' ORDER BY id_abono";
 		        
 		        try{
 		        	Statement st = con.createStatement();

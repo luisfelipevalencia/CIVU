@@ -38,6 +38,7 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 	Item item;
 	Cliente cliente;
 	ConsultaCliente consultaCliente = new ConsultaCliente();
+	ReciboVenta reciboVenta;
 	
 	
 	
@@ -54,6 +55,7 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 		this.ventanaVentas.btnReserva.addActionListener(this);
 		this.ventanaVentas.table_1.addMouseListener(this);
 		this.ventanaVentas.textFieldDescuento.addKeyListener(this);
+		this.ventanaVentas.btnActualizarTablaItemsVentas.addActionListener(this);
 		consultaInventario.poblarTablaItemVentas(ventanaVentas.table_1);
 		
 		
@@ -138,10 +140,16 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 		}
 		
 		
-		
-		
-		
 		if(e.getSource() == ventanaVentas.btnBuscarItem) {
+			
+			ventanaVentas.borrarElementosTabla(ventanaVentas.model_1);
+			
+			String parametroBusqueda = ventanaVentas.parametroBusquedaItem((ventanaVentas.comboBoxArgumentoBusqueda));
+			
+			consultaInventario.buscarArticulosTablaVentas(parametroBusqueda, ventanaVentas.textFieldBuscarItemPorId, ventanaVentas.table_1);
+			
+			ventanaVentas.textFieldBuscarItemPorId.setText(null);
+			ventanaVentas.comboBoxArgumentoBusqueda.setSelectedIndex(0);
 			
 		}
 		
@@ -171,9 +179,19 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 					consultaVentas.actualizarCantidades(ventanaVentas);
 					consultaVentas.registrarDetalleVenta(ventanaVentas);
 					
+					ReciboVenta recibo = new ReciboVenta(ventanaVentas);
+					try {
+						int idClient = Integer.valueOf(ventanaVentas.textFieldIdCliente.getText());
+						recibo.crearPdf(empleado,idClient,ventanaVentas.table);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					
 					ventanaVentas.borrarElementosTabla(ventanaVentas.model_1);
 					consultaInventario.poblarTablaItemVentas(ventanaVentas.table_1);
+					verificacionCliente = false;
 					
 					
 				}else {
@@ -208,6 +226,7 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 					
 				}else {
 					
+					JOptionPane.showMessageDialog(null, "Cliente no registrado");
 					ventanaGestionClientes = new VentanaGestionClientes(); 
 					controladorGestionClientes = new ControladorGestionClientes(ventanaGestionClientes);
 					
@@ -238,8 +257,20 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 					consultaVentas.actualizarCantidades(ventanaVentas);
 					consultaVentas.registrarDetalleReserva(ventanaVentas);
 					
+					
+					ReciboVenta recibo = new ReciboVenta(ventanaVentas);
+					try {
+						int idClient = Integer.valueOf(ventanaVentas.textFieldIdCliente.getText());
+						recibo.crearPdfReservas(empleado, idClient, ventanaVentas.table);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
 					ventanaVentas.borrarElementosTabla(ventanaVentas.model_1);
 					consultaInventario.poblarTablaItemVentas(ventanaVentas.table_1);
+					verificacionCliente = false;
 					
 					
 					
@@ -251,6 +282,11 @@ public class ControladorVentas implements ActionListener, MouseListener, KeyList
 				 JOptionPane.showMessageDialog(null, "Verifique la cedula del cliente");
 			}
 			
+		}
+		
+		if(e.getSource() == ventanaVentas.btnActualizarTablaItemsVentas) {
+			ventanaVentas.borrarElementosTabla(ventanaVentas.model_1);
+			consultaInventario.poblarTablaItemVentas(ventanaVentas.table_1);
 		}
 		
 		

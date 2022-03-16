@@ -3,4 +3,7 @@ module DS2 {
 	requires java.sql;
 	requires kernel;
 	requires layout;
+	requires io;
+	requires jdatepicker;
+
 }

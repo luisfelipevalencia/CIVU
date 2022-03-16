@@ -51,6 +51,8 @@ public class VentanaVentas extends JPanel {
 	public JTextField textFieldDescuento;
 	private JLabel lblNewLabel_1_5;
 	public JTextField textFieldSubtotal;
+	public JComboBox comboBoxArgumentoBusqueda;
+	public JButton btnActualizarTablaItemsVentas;
 
 	/**
 	 * Create the panel.
@@ -68,7 +70,7 @@ public class VentanaVentas extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("ID Item:");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(30, 98, 56, 27);
+		lblNewLabel_1.setBounds(30, 121, 56, 27);
 		add(lblNewLabel_1);
 		
 		textFieldIdItem = new JTextField();
@@ -107,36 +109,31 @@ public class VentanaVentas extends JPanel {
 		textFieldIdItem.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldIdItem.setBackground(new Color(255, 255, 255));
 		textFieldIdItem.setBorder(null);
-		textFieldIdItem.setBounds(96, 98, 166, 20);
+		textFieldIdItem.setBounds(96, 121, 166, 20);
 		add(textFieldIdItem);
 		textFieldIdItem.setColumns(10);
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(0, 153, 255));
-		separator.setBounds(96, 122, 166, 2);
+		separator.setBounds(96, 145, 166, 2);
 		add(separator);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Cantidad:");
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_2.setBounds(30, 139, 69, 26);
+		lblNewLabel_1_2.setBounds(30, 162, 69, 26);
 		add(lblNewLabel_1_2);
-		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setForeground(new Color(0, 153, 255));
-		separator_2.setBounds(104, 163, 158, 2);
-		add(separator_2);
 		
 		btnEliminarRegistroTabla = new JButton("ELIMINAR");
 		btnEliminarRegistroTabla.setForeground(Color.WHITE);
 		btnEliminarRegistroTabla.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnEliminarRegistroTabla.setBorder(null);
 		btnEliminarRegistroTabla.setBackground(new Color(0, 51, 153));
-		btnEliminarRegistroTabla.setBounds(745, 220, 113, 25);
+		btnEliminarRegistroTabla.setBounds(745, 236, 113, 25);
 		add(btnEliminarRegistroTabla);
 		
 		JSeparator separator_6 = new JSeparator();
-		separator_6.setBounds(30, 207, 828, 2);
+		separator_6.setBounds(30, 223, 828, 2);
 		add(separator_6);
 		
 		textFieldBuscarItemPorId = new JTextField();
@@ -144,45 +141,23 @@ public class VentanaVentas extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				
-				char validar=e.getKeyChar();
-	
 				
-				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
-				}
-				
-				if(e.getKeyChar()>32 && e.getKeyChar()<48) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
-				}
-				
-				
-				if(textFieldBuscarItemPorId.getText().length()>= 15) {
-					getToolkit().beep();
-					e.consume();
-					
-					JOptionPane.showMessageDialog(null, "Ingresar 15 numeros o menos");
-				}
+
 			}
 		});
 		textFieldBuscarItemPorId.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldBuscarItemPorId.setColumns(10);
 		textFieldBuscarItemPorId.setBorder(null);
 		textFieldBuscarItemPorId.setBackground(Color.WHITE);
-		textFieldBuscarItemPorId.setBounds(434, 61, 301, 20);
+		textFieldBuscarItemPorId.setBounds(487, 61, 166, 20);
 		add(textFieldBuscarItemPorId);
 		
 		JSeparator separator_7 = new JSeparator();
 		separator_7.setForeground(new Color(0, 153, 255));
-		separator_7.setBounds(434, 85, 301, 2);
+		separator_7.setBounds(487, 85, 166, 2);
 		add(separator_7);
 		
-		btnBuscarItem = new JButton("BUSCAR ITEM");
+		btnBuscarItem = new JButton("BUSCAR");
 		btnBuscarItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -191,11 +166,11 @@ public class VentanaVentas extends JPanel {
 		btnBuscarItem.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnBuscarItem.setBorder(null);
 		btnBuscarItem.setBackground(new Color(0, 51, 153));
-		btnBuscarItem.setBounds(745, 61, 113, 25);
+		btnBuscarItem.setBounds(663, 61, 84, 25);
 		add(btnBuscarItem);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 220, 691, 102);
+		scrollPane.setBounds(30, 236, 691, 102);
 		add(scrollPane);
 		scrollPane.setBackground(Color.WHITE);
 		
@@ -220,7 +195,7 @@ public class VentanaVentas extends JPanel {
 		btnVenta.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnVenta.setBorder(null);
 		btnVenta.setBackground(new Color(0, 51, 153));
-		btnVenta.setBounds(30, 442, 113, 25);
+		btnVenta.setBounds(570, 449, 151, 25);
 		add(btnVenta);
 		
 		btnLimpiarRegistrosTabla = new JButton("LIMPIAR");
@@ -232,19 +207,19 @@ public class VentanaVentas extends JPanel {
 		btnLimpiarRegistrosTabla.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnLimpiarRegistrosTabla.setBorder(null);
 		btnLimpiarRegistrosTabla.setBackground(new Color(0, 51, 153));
-		btnLimpiarRegistrosTabla.setBounds(745, 262, 113, 25);
+		btnLimpiarRegistrosTabla.setBounds(745, 278, 113, 25);
 		add(btnLimpiarRegistrosTabla);
 		
 		comboCantidad = new JComboBox();
 		comboCantidad.setBackground(Color.WHITE);
 		comboCantidad.setFont(new Font("Roboto", Font.PLAIN, 12));
-		comboCantidad.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"}));
+		comboCantidad.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"}));
 		comboCantidad.setBorder(null);
-		comboCantidad.setBounds(104, 139, 158, 20);
+		comboCantidad.setBounds(104, 162, 158, 20);
 		add(comboCantidad);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(434, 98, 424, 102);
+		scrollPane_2.setBounds(341, 98, 517, 114);
 		add(scrollPane_2);
 		
 		table_1 = new JTable();
@@ -253,7 +228,7 @@ public class VentanaVentas extends JPanel {
 		
 		model_1 = new DefaultTableModel();
 		
-		Object[] column_1 = {"ID","Referencia","Cantidad","Precio", "Talla", "Color"};
+		Object[] column_1 = {"ID","Referencia","Cantidad","Precio", "Talla", "Color", "Genero"};
 		Object[] row_1 = new Object[0];
 		model_1.setColumnIdentifiers(column_1);
 		table_1.setModel(model_1);
@@ -266,6 +241,27 @@ public class VentanaVentas extends JPanel {
 		add(separator_1);
 		
 		textFieldIdCliente = new JTextField();
+		textFieldIdCliente.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar=e.getKeyChar();
+	
+				
+				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+				
+				if(e.getKeyChar()>32 && e.getKeyChar()<48) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+			}
+		});
 		textFieldIdCliente.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldIdCliente.setColumns(10);
 		textFieldIdCliente.setBorder(null);
@@ -284,20 +280,20 @@ public class VentanaVentas extends JPanel {
 		btnComprobarCliente.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnComprobarCliente.setBorder(null);
 		btnComprobarCliente.setBackground(new Color(0, 51, 153));
-		btnComprobarCliente.setBounds(304, 61, 95, 26);
+		btnComprobarCliente.setBounds(30, 90, 232, 20);
 		add(btnComprobarCliente);
 		
 		lblNewLabel_1_3 = new JLabel("Total");
 		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_3.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_3.setBounds(471, 395, 84, 20);
+		lblNewLabel_1_3.setBounds(471, 411, 84, 20);
 		add(lblNewLabel_1_3);
 		
 		textFieldTotal = new JTextField();
 		textFieldTotal.setBackground(Color.WHITE);
 		textFieldTotal.setEditable(false);
 		textFieldTotal.setColumns(10);
-		textFieldTotal.setBounds(570, 395, 151, 20);
+		textFieldTotal.setBounds(570, 411, 151, 20);
 		add(textFieldTotal);
 		
 		btnAgregarItem = new JButton("AGREGAR");
@@ -305,7 +301,7 @@ public class VentanaVentas extends JPanel {
 		btnAgregarItem.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnAgregarItem.setBorder(null);
 		btnAgregarItem.setBackground(new Color(0, 51, 153));
-		btnAgregarItem.setBounds(304, 139, 95, 26);
+		btnAgregarItem.setBounds(30, 191, 232, 21);
 		add(btnAgregarItem);
 		
 		btnReserva = new JButton("RESERVA");
@@ -313,33 +309,48 @@ public class VentanaVentas extends JPanel {
 		btnReserva.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnReserva.setBorder(null);
 		btnReserva.setBackground(new Color(0, 51, 153));
-		btnReserva.setBounds(153, 442, 113, 25);
+		btnReserva.setBounds(745, 449, 113, 25);
 		add(btnReserva);
 		
 		lblNewLabel_1_4 = new JLabel("Descuento");
 		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_4.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_4.setBounds(471, 364, 84, 20);
+		lblNewLabel_1_4.setBounds(471, 380, 84, 20);
 		add(lblNewLabel_1_4);
 		
 		textFieldDescuento = new JTextField();
 		textFieldDescuento.setColumns(10);
 		textFieldDescuento.setBackground(Color.WHITE);
-		textFieldDescuento.setBounds(570, 364, 152, 20);
+		textFieldDescuento.setBounds(570, 380, 152, 20);
 		add(textFieldDescuento);
 		
 		lblNewLabel_1_5 = new JLabel("Subtotal");
 		lblNewLabel_1_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_5.setFont(new Font("Roboto", Font.BOLD, 14));
-		lblNewLabel_1_5.setBounds(471, 333, 85, 20);
+		lblNewLabel_1_5.setBounds(471, 349, 85, 20);
 		add(lblNewLabel_1_5);
 		
 		textFieldSubtotal = new JTextField();
 		textFieldSubtotal.setEditable(false);
 		textFieldSubtotal.setColumns(10);
 		textFieldSubtotal.setBackground(Color.WHITE);
-		textFieldSubtotal.setBounds(570, 333, 151, 20);
+		textFieldSubtotal.setBounds(570, 349, 151, 20);
 		add(textFieldSubtotal);
+		
+		comboBoxArgumentoBusqueda = new JComboBox();
+		comboBoxArgumentoBusqueda.setModel(new DefaultComboBoxModel(new String[] {"", "ID", "Referencia", "Cantidad", "Precio Unidad", "Color", "Genero"}));
+		comboBoxArgumentoBusqueda.setFont(new Font("Roboto", Font.PLAIN, 14));
+		comboBoxArgumentoBusqueda.setBackground(Color.WHITE);
+		comboBoxArgumentoBusqueda.setBounds(341, 62, 136, 25);
+		add(comboBoxArgumentoBusqueda);
+		
+		btnActualizarTablaItemsVentas = new JButton("ACTUALIZAR");
+		btnActualizarTablaItemsVentas.setForeground(Color.WHITE);
+		btnActualizarTablaItemsVentas.setFont(new Font("Roboto", Font.BOLD, 12));
+		btnActualizarTablaItemsVentas.setBorder(null);
+		btnActualizarTablaItemsVentas.setBackground(new Color(0, 51, 153));
+		btnActualizarTablaItemsVentas.setBounds(757, 60, 101, 25);
+		add(btnActualizarTablaItemsVentas);
 
 	}
 	
@@ -363,33 +374,6 @@ public class VentanaVentas extends JPanel {
 
 	}
 	
-
-	/*
-	public boolean validarCamposVacios() {
-		boolean camposVacios=false;
-		
-		if(textFieldIdUsuario.getText().isEmpty() || textFieldNombreUsuario.getText().isEmpty() || validarComboBox(comboBoxYear) || validarComboBox(comboBoxMonth) || validarComboBox(comboBoxDay) || validarComboBox(comboBoxCargo) || textFieldTelefonoUsuario.getText().isEmpty() && textFieldPasswordUsuario.getText().isEmpty()) {
-			
-			camposVacios=true;
-		}else {
-			camposVacios=false;
-		}
-		
-		return camposVacios;
-	}
-	
-	public boolean validarCamposLlenos() {
-		boolean camposLlenos=false;
-		
-		if(textFieldIdUsuario.getText().isEmpty()==false && textFieldNombreUsuario.getText().isEmpty()==false && validarComboBox(comboBoxYear)==false && validarComboBox(comboBoxMonth)==false && validarComboBox(comboBoxDay)==false && validarComboBox(comboBoxCargo)==false && validarComboBox(comboBoxCargo)==false && textFieldTelefonoUsuario.getText().isEmpty()==false && textFieldPasswordUsuario.getText().isEmpty()==false) {
-			camposLlenos = true;
-		}else {
-			camposLlenos = false;
-		}
-			
-		return camposLlenos;
-	}
-	*/
 	
 	public void borrarElementosTabla(DefaultTableModel model) {
 		 
@@ -398,5 +382,50 @@ public class VentanaVentas extends JPanel {
         for (int i = numeroFilasBorrar - 1; i >= 0; i--) {
             model.removeRow(i);
         }
+	}
+	
+	public String parametroBusquedaItem(JComboBox box) {
+		
+		String parametro = box.getSelectedItem().toString();
+		String paramentroSQL = "";
+		
+	    switch (parametro) {
+	    
+        case "ID":
+        	paramentroSQL = "id_producto"; 
+            break;
+        case "Referencia":
+        	paramentroSQL = "referencia_producto";
+            break;
+        case "Marca":
+        	paramentroSQL = "Marca_producto";
+            break;
+        case "ID Proveedor":
+        	paramentroSQL = "id_producto"; 
+            break;
+        case "Cantidad":
+        	paramentroSQL = "cantidad_producto";
+            break;
+        case "Costo Unidad":
+        	paramentroSQL = "costo_unidad_producto";
+            break;
+        case "Precio Unidad":
+        	paramentroSQL = "precio_unidad_producto"; 
+            break;
+        case "Color":
+        	paramentroSQL = "color_producto";
+            break;
+        case "Genero":
+        	paramentroSQL = "genero_producto";
+            break;
+        case "Talla":
+        	paramentroSQL = "talla_producto";
+            break;
+        case "Tipo":
+        	paramentroSQL = "tipo_calzado"; 
+            break;
+	    }
+		
+		return paramentroSQL;
 	}
 }

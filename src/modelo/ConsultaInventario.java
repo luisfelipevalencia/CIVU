@@ -120,7 +120,55 @@ public class ConsultaInventario extends Conexion {
 	    }
 	  
 	  
-	  
+	  public void buscarArticulosTablaVentas (String parametroBusqueda, JTextField casilla, JTable table){
+		  	
+		  
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+	        Connection con = getConnection();
+	      
+	        String sql = "SELECT * FROM producto WHERE "+ parametroBusqueda + "='"+casilla.getText()+"' ";
+	        
+	        try{
+	           
+	           ps = con.prepareStatement(sql);
+	           rs = ps.executeQuery();
+	           
+
+		           while(rs.next()){
+		        	   
+			        	int id = rs.getInt("id_producto");
+			        	int cantidad = rs.getInt("cantidad_producto");
+			        	int precioUnidad = rs.getInt("precio_unidad_producto");
+			        	int costoUnidad = rs.getInt("costo_unidad_producto");
+			        	int idProveedor = rs.getInt("id_proveedor");
+			        	String tipo = rs.getString("tipo_calzado");
+			        	String marca = rs.getString("marca_producto");
+			        	String talla = rs.getString("talla_producto");
+			        	String color = rs.getString("color_producto");
+			        	String referencia = rs.getString("referencia_producto");
+			        	String genero = rs.getString("genero_producto");
+			        	
+			        	
+			        	Object tbData[] = {id, referencia, cantidad, precioUnidad, talla, color, genero};
+			        	
+			        	DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
+			        	
+			        	tblModel.addRow(tbData);
+		           }
+		     
+	           
+	        }catch(SQLException e) {
+	            System.err.println(e);
+	            
+	        } finally{
+	            try{
+	                con.close();
+	            }catch (SQLException e){
+	                System.err.println(e);
+	            }
+	        }
+	    }
 	  
 	  
 	  
@@ -403,7 +451,7 @@ public class ConsultaInventario extends Conexion {
 		        	String genero = rs.getString("genero_producto");
 		        	
 		        	
-		        	Object tbData[] = {id, referencia, cantidad, precioUnidad, talla, color};
+		        	Object tbData[] = {id, referencia, cantidad, precioUnidad, talla, color, genero};
 		        	
 		        	DefaultTableModel tblModel = (DefaultTableModel)table.getModel();
 		        	

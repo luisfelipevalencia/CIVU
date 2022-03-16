@@ -20,6 +20,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.SystemColor;
 
 public class VentanaGestionInventario extends JPanel {
 	public JTextField textFieldBuscarItem;
@@ -36,13 +37,12 @@ public class VentanaGestionInventario extends JPanel {
 	public JTextField textFieldPrecioUnidad;
 	public JTextField textFieldReferencia;
 	public JTextField textFieldIdItem;
-	
+	public JTextField textFieldMarca;
 	public JComboBox comboBoxProveedor;
 	public JComboBox comboBoxColor;
 	public JComboBox comboBoxTalla;
 	public JComboBox comboBoxTipo;
 	public JComboBox comboBoxGenero;
-	public JTextField textFieldMarca;
 	public JComboBox comboBoxArgumentoBusqueda;
 	
 
@@ -352,11 +352,32 @@ public class VentanaGestionInventario extends JPanel {
 		add(lblNewLabel_1_1_1_1_1);
 		
 		textFieldIdItem = new JTextField();
+		textFieldIdItem.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar=e.getKeyChar();
+	
+				
+				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+				
+				if(e.getKeyChar()>32 && e.getKeyChar()<48) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+			}
+		});
 		textFieldIdItem.setEditable(false);
 		textFieldIdItem.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldIdItem.setColumns(10);
-		textFieldIdItem.setBorder(null);
-		textFieldIdItem.setBackground(Color.WHITE);
+		textFieldIdItem.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		textFieldIdItem.setBackground(SystemColor.control);
 		textFieldIdItem.setBounds(30, 99, 190, 20);
 		add(textFieldIdItem);
 		
@@ -556,5 +577,33 @@ public class VentanaGestionInventario extends JPanel {
 		return paramentroSQL;
 	}
 	
+	public boolean validarComboBox(JComboBox comboBox) {
+		
+		boolean vacio = true;
+		
+		String valor = comboBox.getSelectedItem().toString();
+		
+		if(valor != "") {
+			
+			vacio= false;
+		}
+			
+		return vacio;
+	}
+	
+
+	
+	public boolean validarCamposVacios() {
+		boolean camposVacios=false;
+		
+		if(validarComboBox(comboBoxGenero) || validarComboBox(comboBoxTipo) ||validarComboBox(comboBoxColor) ||validarComboBox(comboBoxProveedor) || textFieldMarca.getText().isEmpty() || textFieldIdItem.getText().isEmpty() || textFieldReferencia.getText().isEmpty() || textFieldCantidad.getText().isEmpty() || textFieldCostoUnidad.getText().isEmpty() || textFieldPrecioUnidad.getText().isEmpty()) {
+			
+			camposVacios=true;
+		}else {
+			camposVacios=false;
+		}
+		
+		return camposVacios;
+	}
 	
 }

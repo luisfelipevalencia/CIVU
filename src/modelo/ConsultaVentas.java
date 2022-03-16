@@ -358,6 +358,44 @@ public class ConsultaVentas extends Conexion{
 	}
 	
 	
+	public int obtenerIdAbono() {
+		int idAbono=0;
+		
+        Connection con = getConnection();
+        String sql = "SELECT max(id_abono) as maximo FROM abonos";
+        
+        try{
+        	
+        	
+        	Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			
+			if(rs.next()) {
+				idAbono = rs.getInt("maximo");
+			}
+
+        	
+           
+        }catch(SQLException e) {
+            System.err.println(e);
+
+        } finally{
+            try{
+                con.close();
+            }catch (SQLException e){
+                System.err.println(e);
+            }
+        }
+        
+        
+		return idAbono;
+			
+	}
+	
+	
+	
+	
+	
 	public void registrarDetalleReserva(VentanaVentas ventanaVentas){
 		
 		int numeroFilas = ventanaVentas.table.getRowCount();

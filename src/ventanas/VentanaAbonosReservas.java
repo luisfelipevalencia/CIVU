@@ -43,6 +43,8 @@ public class VentanaAbonosReservas extends JPanel {
 	public JTextField textFieldIdReservaAbonos;
 	public JTextField textFieldCantidadAbono;
 	public JTextField textFieldBuscarAbono;
+	public JButton btnActualizarTablaAbonos;
+	public JButton btnActualizarTablaReserva;
 
 	/**
 	 * Create the panel.
@@ -96,12 +98,12 @@ public class VentanaAbonosReservas extends JPanel {
 		textFieldBuscarReserva.setColumns(10);
 		textFieldBuscarReserva.setBorder(null);
 		textFieldBuscarReserva.setBackground(Color.WHITE);
-		textFieldBuscarReserva.setBounds(299, 61, 422, 20);
+		textFieldBuscarReserva.setBounds(299, 61, 301, 20);
 		add(textFieldBuscarReserva);
 		
 		JSeparator separator_7 = new JSeparator();
 		separator_7.setForeground(new Color(0, 153, 255));
-		separator_7.setBounds(299, 85, 422, 2);
+		separator_7.setBounds(299, 85, 301, 2);
 		add(separator_7);
 		
 		btnBuscarReserva = new JButton("BUSCAR RESERVA");
@@ -113,7 +115,7 @@ public class VentanaAbonosReservas extends JPanel {
 		btnBuscarReserva.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnBuscarReserva.setBorder(null);
 		btnBuscarReserva.setBackground(new Color(0, 51, 153));
-		btnBuscarReserva.setBounds(731, 61, 127, 25);
+		btnBuscarReserva.setBounds(610, 62, 127, 25);
 		add(btnBuscarReserva);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -168,6 +170,20 @@ public class VentanaAbonosReservas extends JPanel {
 		add(separator_1);
 		
 		textFieldIdReserva = new JTextField();
+		textFieldIdReserva.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar=e.getKeyChar();
+	
+				
+				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+			}
+		});
 		textFieldIdReserva.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldIdReserva.setColumns(10);
 		textFieldIdReserva.setBorder(null);
@@ -201,6 +217,20 @@ public class VentanaAbonosReservas extends JPanel {
 		add(lblNewLabel_2_1);
 		
 		textFieldIdReservaAbonos = new JTextField();
+		textFieldIdReservaAbonos.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar=e.getKeyChar();
+	
+				
+				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+			}
+		});
 		textFieldIdReservaAbonos.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldIdReservaAbonos.setColumns(10);
 		textFieldIdReservaAbonos.setBorder(null);
@@ -220,6 +250,20 @@ public class VentanaAbonosReservas extends JPanel {
 		add(lblNewLabel_1_1);
 		
 		textFieldCantidadAbono = new JTextField();
+		textFieldCantidadAbono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar=e.getKeyChar();
+	
+				
+				if(Character.isLetter(validar) || (e.getKeyChar()>32 && e.getKeyChar()<48) || (e.getKeyChar()>57 && e.getKeyChar()<65) || (e.getKeyChar()>90 && e.getKeyChar()<97) || (e.getKeyChar()>122 && e.getKeyChar()<127)) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+				}
+			}
+		});
 		textFieldCantidadAbono.setFont(new Font("Roboto", Font.PLAIN, 14));
 		textFieldCantidadAbono.setColumns(10);
 		textFieldCantidadAbono.setBorder(null);
@@ -234,7 +278,7 @@ public class VentanaAbonosReservas extends JPanel {
 		
 		JSeparator separator_7_1 = new JSeparator();
 		separator_7_1.setForeground(new Color(0, 153, 255));
-		separator_7_1.setBounds(299, 300, 422, 2);
+		separator_7_1.setBounds(299, 300, 301, 2);
 		add(separator_7_1);
 		
 		textFieldBuscarAbono = new JTextField();
@@ -242,7 +286,7 @@ public class VentanaAbonosReservas extends JPanel {
 		textFieldBuscarAbono.setColumns(10);
 		textFieldBuscarAbono.setBorder(null);
 		textFieldBuscarAbono.setBackground(Color.WHITE);
-		textFieldBuscarAbono.setBounds(299, 276, 422, 20);
+		textFieldBuscarAbono.setBounds(299, 276, 301, 20);
 		add(textFieldBuscarAbono);
 		
 		btnBuscarAbono = new JButton("BUSCAR ABONO");
@@ -250,8 +294,24 @@ public class VentanaAbonosReservas extends JPanel {
 		btnBuscarAbono.setFont(new Font("Roboto", Font.BOLD, 12));
 		btnBuscarAbono.setBorder(null);
 		btnBuscarAbono.setBackground(new Color(0, 51, 153));
-		btnBuscarAbono.setBounds(731, 276, 127, 25);
+		btnBuscarAbono.setBounds(610, 276, 127, 25);
 		add(btnBuscarAbono);
+		
+		btnActualizarTablaReserva = new JButton("ACTUALIZAR");
+		btnActualizarTablaReserva.setForeground(Color.WHITE);
+		btnActualizarTablaReserva.setFont(new Font("Roboto", Font.BOLD, 12));
+		btnActualizarTablaReserva.setBorder(null);
+		btnActualizarTablaReserva.setBackground(new Color(0, 51, 153));
+		btnActualizarTablaReserva.setBounds(747, 61, 111, 25);
+		add(btnActualizarTablaReserva);
+		
+		btnActualizarTablaAbonos = new JButton("ACTUALIZAR");
+		btnActualizarTablaAbonos.setForeground(Color.WHITE);
+		btnActualizarTablaAbonos.setFont(new Font("Roboto", Font.BOLD, 12));
+		btnActualizarTablaAbonos.setBorder(null);
+		btnActualizarTablaAbonos.setBackground(new Color(0, 51, 153));
+		btnActualizarTablaAbonos.setBounds(747, 276, 111, 25);
+		add(btnActualizarTablaAbonos);
 
 	}
 	

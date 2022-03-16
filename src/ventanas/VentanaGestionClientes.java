@@ -158,10 +158,10 @@ public class VentanaGestionClientes extends JPanel {
 					JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
 				}
 				
-				if(textFieldTelefonoCliente.getText().length()>= 15) {
+				if(textFieldTelefonoCliente.getText().length()>= 10) {
 					getToolkit().beep();
 					e.consume();
-					JOptionPane.showMessageDialog(null, "Ingresar 15 letras o menos");
+					JOptionPane.showMessageDialog(null, "Ingresar 10 números o menos");
 				}
 				
 			}
@@ -349,8 +349,6 @@ public class VentanaGestionClientes extends JPanel {
 			camposVacios=false;
 		}
 		
-		System.out.println("Si entro al metodo validadr camposvacios");
-		System.out.println(camposVacios);
 		return camposVacios;
 	}
 	
