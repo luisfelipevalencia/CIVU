@@ -596,7 +596,7 @@ public class VentanaGestionInventario extends JPanel {
 	public boolean validarCamposVacios() {
 		boolean camposVacios=false;
 		
-		if(validarComboBox(comboBoxGenero) || validarComboBox(comboBoxTipo) ||validarComboBox(comboBoxColor) ||validarComboBox(comboBoxProveedor) || textFieldMarca.getText().isEmpty() || textFieldIdItem.getText().isEmpty() || textFieldReferencia.getText().isEmpty() || textFieldCantidad.getText().isEmpty() || textFieldCostoUnidad.getText().isEmpty() || textFieldPrecioUnidad.getText().isEmpty()) {
+		if(validarComboBox(comboBoxGenero) || validarComboBox(comboBoxTipo) ||validarComboBox(comboBoxColor) ||validarComboBox(comboBoxProveedor) || textFieldMarca.getText().isEmpty() || textFieldReferencia.getText().isEmpty() || textFieldCantidad.getText().isEmpty() || textFieldCostoUnidad.getText().isEmpty() || textFieldPrecioUnidad.getText().isEmpty()) {
 			
 			camposVacios=true;
 		}else {

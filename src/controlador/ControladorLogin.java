@@ -165,14 +165,17 @@ public class ControladorLogin implements ActionListener {
 		ventanaLogin.dispose();
 		ventanaPrincipal = new VentanaPrincipal();
 		ventanaPrincipal.setTitle("Menu Principal");
+		
 		ventanaPrincipal.btnGestionUsuarios.setEnabled(false);
 		ventanaPrincipal.btnInventario.setEnabled(false);
 		ventanaPrincipal.btnReportes.setEnabled(false);
 		ventanaPrincipal.btnGestionProveedores.setEnabled(false);
+		
 		LocalDate date = LocalDate.now();
 		int mes = date.getMonthValue();
 		int dia = date.getDayOfMonth();
 		System.out.println(mes);
+		
 		ventanaPrincipal.textFieldFechaSistema.setText("Hoy es " + obtenerMes(mes)+ " " + dia + " " + "del año " + 2022 );
 		ventanaPrincipal.textFieldUsuarioConectado.setText(persona.getNombre());
 		ventanaPrincipal.setVisible(true);
